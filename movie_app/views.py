@@ -1,15 +1,16 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Movie
+from django.db.models import Value
 # Create your views here.
 
 
 def show_all_movie(request):
-    movies = Movie.objects.all()
+    movies = Movie.objects.annotate(new_field=Value(True))
     return render(request,"all_movies.html",context={"movies":movies})
 
 
-def show_one_movie(request, id_movie):
-    movie = get_object_or_404(Movie,id=id_movie)
+def show_one_movie(request, slug_movie:str):
+    movie = get_object_or_404(Movie, slug=slug_movie)
     context = {
         "movie": movie
         }
