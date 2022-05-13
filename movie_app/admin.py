@@ -2,14 +2,36 @@
 from django.contrib import admin, messages
 from .models import Movie
 
+class RatingFilter(admin.SimpleListFilter):
+    title = "filter rating"
+    parameter_name = 'myfilter'
+    def lookups(self, request, model_admin):
+        return [
+            ('<40', 'Low'),
+            ('40-80', 'Medium'),
+            ('>=80', 'Hight'),
+        ]
+    def  queryset(self, request, queryset):
+        if self.value()=='<40':
+            return queryset.filter(rating__lt=40)
+        if self.value()=='40-80':
+            return queryset.filter(rating__gte=40,rating__lt=80)
+        if self.value()=='<40':
+            return queryset.filter(rating__gte=80)
+        return queryset
 
 @admin.register(Movie) # Can use decorator
 class MovieAdmin(admin.ModelAdmin):
+    #fields = []
+    exclude = [ 'slug' ]
+    readonly_fields = ['currency_budget']
     list_display = ['name', 'rating', 'year', 'currency_budget',"rating_name"]
     list_editable = ['rating', 'year','currency_budget' ] # don't use name 
     ordering = ['-rating'] # for sorting
     list_per_page = 30 # pagination
     actions = ['set_dollars']
+    search_fields = ['name__startswith', 'rating'] # 
+    list_filter = ['name', 'rating', 'year',RatingFilter]
 
     @admin.display(ordering='rating', description="Status")
     def rating_name(self, movie:Movie):
