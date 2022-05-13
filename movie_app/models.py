@@ -1,3 +1,4 @@
+from locale import currency
 import django
 from django.db import models
 from django.urls import reverse
@@ -7,10 +8,20 @@ from django.utils.text import slugify
 
 
 class Movie(models.Model):
+    USD = "USD"
+    EUR = "EUR"
+    RUB = "RUB"
+    CURRENCY_CHOICES = [
+        (EUR, 'Euro'),
+        (USD, 'Dollars'),
+        (RUB, 'Rubles'),
+    ]
+
     name = models.CharField(max_length=40)
     rating = models.IntegerField()
     year = models.IntegerField(null=True)
     budget = models.IntegerField(default=100000)
+    currency_budget = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=RUB)
     slug = models.SlugField(default="", null=False)
 
 

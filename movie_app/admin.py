@@ -1,13 +1,15 @@
-from django.contrib import admin
+ 
+from django.contrib import admin, messages
 from .models import Movie
 
 
 @admin.register(Movie) # Can use decorator
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ['name', 'rating', 'year', "rating_name"]
-    list_editable = ['rating', 'year' ] # don't use name 
+    list_display = ['name', 'rating', 'year', 'currency_budget',"rating_name"]
+    list_editable = ['rating', 'year','currency_budget' ] # don't use name 
     ordering = ['-rating'] # for sorting
     list_per_page = 30 # pagination
+    actions = ['set_dollars']
 
     @admin.display(ordering='rating', description="Status")
     def rating_name(self, movie:Movie):
@@ -19,7 +21,15 @@ class MovieAdmin(admin.ModelAdmin):
             return "Good"
         else:
             return "Bad"
-
+            
+    @admin.action(description="Set dollars")
+    def set_dollars(self,request, qs):
+        cnt_res = qs.update(currency_budget=Movie.USD)
+        self.message_user(
+            request,
+            f" Update {cnt_res}",
+            messages.ERROR
+        )
 
 # Register your models here.
 # admin.site.register(Movie,MovieAdmin )
