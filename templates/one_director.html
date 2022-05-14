@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+{% block Title %}
+    Информация о Режиссере - {{ director.name }}
+{% endblock %}
+
+{% block content %}
+    <h2> Информация о Режиссере </h2>
+    <h3> {{ director }} </h3>
+    <h3> {{ director.director_email }} </h3>
+{% endblock %}

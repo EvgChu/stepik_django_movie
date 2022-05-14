@@ -10,13 +10,18 @@ class Director(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     director_email = models.EmailField()
+
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'
+
+    def get_url(self):
+        return  reverse('director-detail', args=[self.id])
 
 class Actor(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     actor_email = models.EmailField()
+
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'
 
@@ -43,6 +48,7 @@ class Movie(models.Model):
     slug = models.SlugField(default="", null=False)
 
     director = models.ForeignKey(Director, on_delete=models.PROTECT, null=True)
+    
     # def save(self, *args, **kwargs) -> None:
     #     self.slug = slugify(self.name)
     #     return super(Movie, self).save(*args, **kwargs)
