@@ -1,7 +1,9 @@
  
 from django.contrib import admin, messages
-from .models import Movie
+from .models import Movie, Director
 
+
+admin.site.register(Director)
 class RatingFilter(admin.SimpleListFilter):
     title = "filter rating"
     parameter_name = 'myfilter'
@@ -25,8 +27,8 @@ class MovieAdmin(admin.ModelAdmin):
     #fields = []
     exclude = [ 'slug' ]
     readonly_fields = ['currency_budget']
-    list_display = ['name', 'rating', 'year', 'currency_budget',"rating_name"]
-    list_editable = ['rating', 'year','currency_budget' ] # don't use name 
+    list_display = ['name', 'rating', 'director', 'currency_budget',"rating_name"]
+    list_editable = ['rating', 'director','currency_budget' ] # don't use name 
     ordering = ['-rating'] # for sorting
     list_per_page = 30 # pagination
     actions = ['set_dollars']
@@ -54,4 +56,4 @@ class MovieAdmin(admin.ModelAdmin):
         )
 
 # Register your models here.
-# admin.site.register(Movie,MovieAdmin )
+# 

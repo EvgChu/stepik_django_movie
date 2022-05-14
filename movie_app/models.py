@@ -6,6 +6,19 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.text import slugify
 # Create your models here.
 
+class Director(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    director_email = models.EmailField()
+    def __str__(self) -> str:
+        return f'{self.first_name} {self.last_name}'
+
+class Actor(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    actor_email = models.EmailField()
+    def __str__(self) -> str:
+        return f'{self.first_name} {self.last_name}'
 
 class Movie(models.Model):
     USD = "USD"
@@ -29,7 +42,7 @@ class Movie(models.Model):
     currency_budget = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=RUB)
     slug = models.SlugField(default="", null=False)
 
-
+    director = models.ForeignKey(Director, on_delete=models.PROTECT, null=True)
     # def save(self, *args, **kwargs) -> None:
     #     self.slug = slugify(self.name)
     #     return super(Movie, self).save(*args, **kwargs)
