@@ -17,6 +17,13 @@ class Director(models.Model):
     def get_url(self):
         return  reverse('director-detail', args=[self.id])
 
+class DressingRoom(models.Model):
+    floor = models.IntegerField()
+    number = models.IntegerField(default=2)
+
+    def __str__(self) -> str:
+        return f"{self.floor} - {self.number}"
+
 class Actor(models.Model):
     MALE = "M"
     FEMALE = "F" 
@@ -28,6 +35,7 @@ class Actor(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
+    dressing = models.OneToOneField(DressingRoom,on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self) -> str:
         if self.gender == self.MALE:
@@ -37,6 +45,7 @@ class Actor(models.Model):
 
     def get_url(self):
         return  reverse('actor-detail', args=[self.id])
+
 class Movie(models.Model):
     USD = "USD"
     EUR = "EUR"

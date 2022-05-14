@@ -1,10 +1,12 @@
  
 from django.contrib import admin, messages
-from .models import Movie, Director, Actor
+from .models import Movie, Director, Actor, DressingRoom
 
 
 admin.site.register(Director)
 admin.site.register(Actor)
+admin.site.register(DressingRoom)
+
 class RatingFilter(admin.SimpleListFilter):
     title = "filter rating"
     parameter_name = 'myfilter'
@@ -26,7 +28,7 @@ class RatingFilter(admin.SimpleListFilter):
 @admin.register(Movie) # Can use decorator
 class MovieAdmin(admin.ModelAdmin):
     #fields = []
-    exclude = [ 'slug' ]
+    #exclude = [ 'slug' ]
     readonly_fields = ['currency_budget']
     list_display = ['name', 'rating', 'director','currency_budget',"rating_name"]
     list_editable = ['rating', 'director','currency_budget' ] # don't use name 
