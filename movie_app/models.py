@@ -18,13 +18,25 @@ class Director(models.Model):
         return  reverse('director-detail', args=[self.id])
 
 class Actor(models.Model):
+    MALE = "M"
+    FEMALE = "F" 
+    GENDERS = [
+        (MALE, 'Man'),
+        (FEMALE, 'Woman'), 
+    ]
+
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    actor_email = models.EmailField()
+    gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
 
     def __str__(self) -> str:
-        return f'{self.first_name} {self.last_name}'
+        if self.gender == self.MALE:
+            return f'Mr {self.first_name} {self.last_name}'
+        else:
+            return f'Mrs {self.first_name} {self.last_name}'
 
+    def get_url(self):
+        return  reverse('actor-detail', args=[self.id])
 class Movie(models.Model):
     USD = "USD"
     EUR = "EUR"
@@ -48,7 +60,7 @@ class Movie(models.Model):
     slug = models.SlugField(default="", null=False)
 
     director = models.ForeignKey(Director, on_delete=models.PROTECT, null=True)
-    
+    actor = models.ManyToManyField(Actor)
     # def save(self, *args, **kwargs) -> None:
     #     self.slug = slugify(self.name)
     #     return super(Movie, self).save(*args, **kwargs)

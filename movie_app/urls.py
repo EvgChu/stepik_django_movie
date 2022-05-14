@@ -17,8 +17,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.show_all_movie),
+    path('', views.show_all_movie, name='main'),
     path('movie/<str:slug_movie>', views.show_one_movie, name="movie-detail"),
-    path('directors', views.show_all_directors),
+    path('directors', views.show_all_directors, name='directors-main'),
     path('directors/<int:id_director>', views.show_one_director, name="director-detail"),
+    path('actor', views.show_all_actors, name='actors-main'),
+    path('actor/<int:id_actor>', views.show_one_actor, name="actor-detail"),
 ]

@@ -8,5 +8,12 @@
 {% block content %}
     <h2> Информация о фильме </h2>
     <h3> {{ movie }} </h3>
-    <li> <a href="{{ movie.director.get_url }}">  {{ movie.director }} </a> </li>
+    <h4> Режиссер: <a href="{{ movie.director.get_url }}">  {{ movie.director }} </a> </h4>
+    <h3> Актеры </h3>
+    <ul>
+        {% for actor in movie.actor %}
+            <li> </li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}

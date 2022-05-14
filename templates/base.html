@@ -1,3 +1,4 @@
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,13 +9,20 @@
             Главная
         {% endblock %}
     </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 <body>
-
+    <nav > 
+        <ul class="nav_main">
+            <li> <a href="{% url 'main'%}"> Main </a> </li>
+            <li> <a href="{% url 'actors-main'%}"> Actors </a> </li>
+            <li> <a href="{% url 'directors-main'%}"> Directors </a> </li>
+        </ul>
+    </nav>
     <section class="about_films">
         {% block content %}
         {% endblock %}
     </section>
-    
+
 </body>
 </html>
