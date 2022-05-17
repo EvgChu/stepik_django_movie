@@ -7,7 +7,7 @@
 
 {% block content %}
     <h2> Список всех актеров </h2>
-    <ul>
+    <ul class="info-field">
         {% for actor in actors %}
         <li> <a href="{{ actor.get_url }}">  {{ actor }} </a> </li>
         {% endfor %}

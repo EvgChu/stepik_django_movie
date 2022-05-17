@@ -7,7 +7,7 @@
 
 {% block content %}
     <h2> Список всех Режиссеров </h2>
-    <ul>
+    <ul class="info-field">
         {% for director in directors %}
         <li> <a href="{{ director.get_url }}">  {{ director }} </a> </li>
         {% endfor %}

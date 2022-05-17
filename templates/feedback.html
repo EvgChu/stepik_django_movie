@@ -5,15 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <h2> Оставьте отзыа</h2>
-    <form action="" method="post">
+    <h2> Оставьте отзыв</h2>
+    <form action="" method="post" class="info-field">
         {% csrf_token %}
-        {{ form.name.label_tag }}
-        {{ form.name.errors }}
-        {{ form.name }}
-        {{ form.surname.label_tag }}
-        {{ form.surname.errors }}
-        {{ form.surname }}
+        {% for field in form %}
+            <div class="form-style {% if field.errors %} errors {% endif %}">
+                {{ field.label_tag }}
+                {{ field.errors }}
+                {{ field }}
+            </div>
+        {% endfor %}
         <button type="submit"> Отправить </button>
     </form>
 {% endblock %}

@@ -7,7 +7,7 @@
 
 {% block content %}
     <h2> Список всех фильмов </h2>
-    <ul>
+    <ul class="info-field">
         {% for movie in movies %}
         <li> <a href="{{ movie.get_url }}">  {{ movie }} </a> </li>
         {% endfor %}

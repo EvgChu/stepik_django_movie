@@ -7,12 +7,14 @@
 
 {% block content %}
     <h2> Информация о Режиссере </h2>
-    <h3> {{ director }} </h3>
-    <h3> {{ director.director_email }} </h3>
-    <hr>
-    <ul>
-        {% for movie in director.movie_set.all %}
-            <li> <a href="{{ movie.get_url }}">  {{ movie }} </a> </li>
-        {% endfor %}
-    </ul>
+    <div class="info-field">
+        <h3> {{ director }} </h3>
+        <h3> {{ director.director_email }} </h3>
+        <hr>
+        <ul>
+            {% for movie in director.movie_set.all %}
+                <li> <a href="{{ movie.get_url }}">  {{ movie }} </a> </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
