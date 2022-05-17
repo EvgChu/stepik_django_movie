@@ -6,3 +6,6 @@ class FeedbackModel(models.Model):
     surname = models.CharField(max_length=40)
     feedback = models.TextField()
     rating = models.PositiveIntegerField()
+
+    def __str__(self) -> str:
+        return f"{self.name} {self.surname}"

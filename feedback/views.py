@@ -10,17 +10,17 @@ def feedback_index(request):
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
-            feed = FeedbackModel(
-                name=form.cleaned_data['name'],
-                surname=form.cleaned_data['surname'],
-                feedback=form.cleaned_data['feedback'],
-                rating=form.cleaned_data['rating']
-            )
-            feed.save()
+            form.save()
             url = reverse('feedback-done')
             return HttpResponseRedirect(url)
 
+    return render(request, 'feedback.html', context={
+        "form": form
+    })
+
+def update_feedback(request, id):
+    feed = FeedbackModel.objects.get(id)
+    form = FeedbackForm(instance=feed)
     return render(request, 'feedback.html', context={
         "form": form
     })
