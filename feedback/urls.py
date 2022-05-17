@@ -19,6 +19,6 @@ from . import views
 urlpatterns = [
     path('', views.feedback_index, name='feedback-main'), 
     path('done/', views.done, name='feedback-done'), 
-    path('<int:id>/', views.update_feedback, name='feedback-done'), 
+    path('<int:id_feedback>/', views.update_feedback, name='feedback-done'), 
 
 ]
