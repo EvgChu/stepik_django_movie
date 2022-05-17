@@ -8,7 +8,12 @@
     <h2> Оставьте отзыа</h2>
     <form action="" method="post">
         {% csrf_token %}
-        {{ form }}
+        {{ form.name.label_tag }}
+        {{ form.name.errors }}
+        {{ form.name }}
+        {{ form.surname.label_tag }}
+        {{ form.surname.errors }}
+        {{ form.surname }}
         <button type="submit"> Отправить </button>
     </form>
 {% endblock %}

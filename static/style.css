@@ -1,3 +1,7 @@
+body {
+    background-color: antiquewhite;
+}
+
 .nav_main {
     list-style-type: none;
     text-align: center;
